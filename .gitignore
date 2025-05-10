@@ -1,0 +1,13 @@
+cat > .gitignore <<EOF
+# Build results
+bin/
+obj/
+.vs/
+.idea/
+.vscode/
+*.user
+*.suo
+*.db
+*.log
+.DS_Store
+EOF
