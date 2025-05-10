@@ -15,4 +15,25 @@ public class NoteController(INoteService noteService) : ControllerBase
         await noteService.CreateNoteAsync(text);
         return NoContent();
     }
+
+    [HttpGet("getTask/{id:int}")]
+    public async Task<IActionResult> GetTask(int id, CancellationToken cancellationToken = default)
+    {
+        var note = await noteService.GetNoteByIdAsync(id, cancellationToken);
+        return Ok(note);
+    }
+    
+    [HttpGet("getTasks")]
+    public async Task<IActionResult> GetTasks(CancellationToken cancellationToken = default)
+    {
+        var note = await noteService.GetAllNotesAsync(cancellationToken);
+        return Ok(note);
+    }
+
+    [HttpDelete("deleteTask/{id:int}")]
+    public async Task<IActionResult> DeleteTask(int id, CancellationToken cancellationToken = default)
+    {
+        await noteService.DeleteNoteAsync(id, cancellationToken);
+        return NoContent();
+    }
 }
