@@ -36,4 +36,20 @@ public class NoteController(INoteService noteService) : ControllerBase
         await noteService.DeleteNoteAsync(id, cancellationToken);
         return NoContent();
     }
+
+    
+    [HttpPut("updateTask/{id:int}")]
+    public async Task<IActionResult> UpdateTask(int id, string text, CancellationToken cancellationToken = default)
+    {
+        await noteService.UpdateTitleNoteAsync(id, text, cancellationToken);
+        return NoContent();
+    }
+
+    [HttpPut("updateContentTask/{id:int}")]
+    public async Task<IActionResult> UpdateContentTask(int id, string text,
+        CancellationToken cancellationToken = default)
+    {
+        await noteService.CreateNoteContentAsync(id, text, cancellationToken);
+        return NoContent();
+    }
 }
